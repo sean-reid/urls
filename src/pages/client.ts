@@ -4,7 +4,7 @@ export const CLIENT = `
 const f=document.getElementById("f"),r=document.getElementById("result");
 if(!f||!r)return;
 const nf=new Intl.NumberFormat("en-US");
-const exact=document.getElementById("exact"),num=f.elements.namedItem("exact");
+const exact=document.getElementById("exact"),num=f.querySelector('input[name="exact"]');
 for(const ev of["focus","input"])num.addEventListener(ev,()=>{exact.checked=true});
 document.querySelectorAll("[data-copy]").forEach(b=>{b.hidden=false});
 function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}

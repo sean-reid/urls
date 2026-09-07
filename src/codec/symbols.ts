@@ -43,14 +43,16 @@ function fromDigits(digits: number[], offset: number, width: number, radix: numb
 	return v;
 }
 
-export function toSymbols(bytes: Uint8Array, radix: number): number[] {
+// `pad` supplies the bytes that complete the last group; the decoder drops
+// them, so random values keep the padding from reading as a repeated token.
+export function toSymbols(bytes: Uint8Array, radix: number, pad: () => number = () => 0): number[] {
 	if (bytes.length > MAX_BYTES) throw new RangeError("payload too large");
 	const out: number[] = [];
 	toDigits(bytes.length, radix, headerWidth(radix), out);
 	const width = digitsPerGroup(radix);
 	for (let i = 0; i < bytes.length; i += GROUP) {
 		let v = 0;
-		for (let j = 0; j < GROUP; j++) v = v * 256 + (bytes[i + j] ?? 0);
+		for (let j = 0; j < GROUP; j++) v = v * 256 + (bytes[i + j] ?? pad() & 0xff);
 		toDigits(v, radix, width, out);
 	}
 	return out;

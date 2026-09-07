@@ -29,7 +29,7 @@ export function extend(
 	origin: string,
 	rng = new Rng(),
 ): Extended {
-	const symbols = toSymbols(frame(destination), style.radix);
+	const symbols = toSymbols(frame(destination), style.radix, () => rng.int(256));
 	const path = style.render(symbols, length - origin.length, rng);
 	const url = origin + path;
 	return { url, length: url.length, minimum: url.length > length };
