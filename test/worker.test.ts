@@ -47,7 +47,11 @@ describe("pages", () => {
 describe("form", () => {
 	it("renders a result without javascript", async () => {
 		const body = new URLSearchParams({ url: "example.com/x", style: "chess", length: "500" });
-		const res = await SELF.fetch(`${BASE}/`, { method: "POST", body, headers: { "content-type": "application/x-www-form-urlencoded" } });
+		const res = await SELF.fetch(`${BASE}/`, {
+			method: "POST",
+			body,
+			headers: { "content-type": "application/x-www-form-urlencoded" },
+		});
 		expect(res.status).toBe(200);
 		const html = await res.text();
 		const m = /<p class="url" id="out">([^<]+)<\/p>/.exec(html);
@@ -61,8 +65,17 @@ describe("form", () => {
 	});
 
 	it("keeps the exact length choice and shows errors", async () => {
-		const body = new URLSearchParams({ url: "http://localhost/", style: "hex", length: "exact", exact: "333" });
-		const res = await SELF.fetch(`${BASE}/`, { method: "POST", body, headers: { "content-type": "application/x-www-form-urlencoded" } });
+		const body = new URLSearchParams({
+			url: "http://localhost/",
+			style: "hex",
+			length: "exact",
+			exact: "333",
+		});
+		const res = await SELF.fetch(`${BASE}/`, {
+			method: "POST",
+			body,
+			headers: { "content-type": "application/x-www-form-urlencoded" },
+		});
 		expect(res.status).toBe(400);
 		const html = await res.text();
 		expect(html).toContain('id="exact" checked');
@@ -112,7 +125,9 @@ describe("api", () => {
 
 	it("reports minimum when the destination needs more room", async () => {
 		const long = `https://example.com/${"y".repeat(300)}`;
-		const res = await SELF.fetch(`${BASE}/api/v1/extend?url=${encodeURIComponent(long)}&length=100&style=hex`);
+		const res = await SELF.fetch(
+			`${BASE}/api/v1/extend?url=${encodeURIComponent(long)}&length=100&style=hex`,
+		);
 		const body = (await res.json()) as { minimum: boolean; length: number };
 		expect(body.minimum).toBe(true);
 		expect(body.length).toBeGreaterThan(100);
