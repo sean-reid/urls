@@ -27,7 +27,7 @@ describe("frame", () => {
 
 	it("rejects a corrupted frame", () => {
 		const f = frame("https://example.com/");
-		f[3] ^= 0xff;
+		f[3] = (f[3] as number) ^ 0xff;
 		expect(unframe(f)).toBeNull();
 	});
 

@@ -19,7 +19,9 @@ export function unframe(bytes: Uint8Array): string | null {
 	const want = new DataView(bytes.buffer, bytes.byteOffset).getUint32(end);
 	if (crc32(bytes.subarray(0, end)) !== want) return null;
 	try {
-		return new TextDecoder("utf-8", { fatal: true }).decode(bytes.subarray(1, end));
+		return new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(
+			bytes.subarray(1, end),
+		);
 	} catch {
 		return null;
 	}
