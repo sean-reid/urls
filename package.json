@@ -1,0 +1,30 @@
+{
+  "name": "urls",
+  "version": "0.1.0",
+  "private": true,
+  "description": "URL Extension Service",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.tools.json",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "og": "tsx scripts/og.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.12",
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "@cloudflare/workers-types": "^5.20260907.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.129.1"
+  },
+  "packageManager": "pnpm@10.33.0"
+}
