@@ -18,7 +18,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.12",
 		"@cloudflare/vitest-pool-workers": "^0.22.0",
-		"@cloudflare/workers-types": "^5.20260907.1",
+		"@cloudflare/workers-types": "^5.20260918.1",
 		"@playwright/test": "^1.63.0",
 		"@types/node": "^24.0.0",
 		"tsx": "^4.19.0",
